@@ -33,8 +33,7 @@ The entire production website is self-contained in the `website/` directory:
 - `404.html` — Custom 404 error page returning true HTTP 404 status
 - `offline.html` — Dedicated offline/no-internet page with automatic reconnection and retry mechanism
 - `sw.js` — Service worker providing offline page fallback
-- `_headers` — Production security and caching headers (Cloudflare Pages native format)
-- `_redirects` — Static routing rules (`/* /404.html 404`)
+- `_headers` — Production security and caching headers (Cloudflare native format)
 
 ---
 
