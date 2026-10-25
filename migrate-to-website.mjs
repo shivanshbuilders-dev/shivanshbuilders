@@ -671,21 +671,38 @@ const ENHANCED_STYLES = `
     }
   }
 
-  /* 4a. Mobile & Tablet Service Cards Responsive Layout (<= 1200px) */
+  /* 4a. Mobile & Tablet Service Cards Responsive Layout & Stacking Animation (<= 1200px) */
   @media only screen and (max-width: 1200px) {
     .pin-spacer {
+      position: sticky !important;
+      inset: auto !important;
       width: 100% !important;
       max-width: 100% !important;
       height: auto !important;
       min-height: 0 !important;
       padding: 0 16px !important;
-      margin: 0 auto 30px auto !important;
-      inset: auto !important;
-      position: relative !important;
-      display: block !important;
+      margin: 0 auto 36px auto !important;
       box-sizing: border-box !important;
-      transform: none !important;
+      display: block !important;
       clear: both !important;
+      transform: none !important;
+    }
+
+    .pin-spacer:has(.elementor-element-981bb1a),
+    .pin-spacer-1 {
+      top: 76px !important;
+      z-index: 10 !important;
+    }
+    .pin-spacer:has(.elementor-element-bc8075b),
+    .pin-spacer-2 {
+      top: 90px !important;
+      z-index: 20 !important;
+    }
+    .pin-spacer:has(.elementor-element-549dd9e),
+    .pin-spacer-3 {
+      top: 104px !important;
+      z-index: 30 !important;
+      margin-bottom: 70px !important;
     }
 
     .elementor-element.elementor-element-981bb1a,
@@ -697,7 +714,6 @@ const ENHANCED_STYLES = `
       margin: 0 auto !important;
       position: relative !important;
       inset: auto !important;
-      transform: none !important;
       box-sizing: border-box !important;
       opacity: 1 !important;
       visibility: visible !important;
@@ -733,6 +749,18 @@ const ENHANCED_STYLES = `
       height: auto !important;
       border-radius: 10px !important;
       background-color: #f7f7f8 !important;
+      box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.08), 0 14px 34px rgba(0, 0, 0, 0.12) !important;
+      transform-origin: center top !important;
+      will-change: transform, filter !important;
+      transition: transform 0.15s ease-out, filter 0.15s ease-out !important;
+    }
+
+    /* Keep Card 2 reading flow uniform (Text first, Image second) */
+    .elementor-element-82ecd13 > .elementor-element:first-child {
+      order: 2 !important; /* image */
+    }
+    .elementor-element-82ecd13 > .elementor-element:last-child {
+      order: 1 !important; /* text */
     }
 
     .elementor-element-da13c3d,
@@ -1205,14 +1233,97 @@ const GLOBAL_SCRIPTS = `
     });
   }
 
+  // 3. Mobile Card Stacking & Layered Animation (Matching PC Experience on Mobile)
+  function initMobileCardStack() {
+    const card1 = document.querySelector('.elementor-element-21aa120');
+    const card2 = document.querySelector('.elementor-element-82ecd13');
+    const card3 = document.querySelector('.elementor-element-f8720b9');
+    if (!card1 || !card2 || !card3) return;
+
+    const sp1 = card1.closest('.pin-spacer');
+    const sp2 = card2.closest('.pin-spacer');
+    const sp3 = card3.closest('.pin-spacer');
+    if (!sp1 || !sp2 || !sp3) return;
+
+    if (sp1) sp1.classList.add('pin-spacer-1');
+    if (sp2) sp2.classList.add('pin-spacer-2');
+    if (sp3) sp3.classList.add('pin-spacer-3');
+
+    let ticking = false;
+    function updateMobileCards() {
+      if (window.innerWidth > 1200) {
+        card1.style.transform = '';
+        card1.style.filter = '';
+        card2.style.transform = '';
+        card2.style.filter = '';
+        sp1.style.top = '';
+        sp1.style.zIndex = '';
+        sp1.style.inset = '';
+        sp2.style.top = '';
+        sp2.style.zIndex = '';
+        sp2.style.inset = '';
+        sp3.style.top = '';
+        sp3.style.zIndex = '';
+        sp3.style.inset = '';
+        return;
+      }
+
+      sp1.style.setProperty('inset', 'auto', 'important');
+      sp1.style.setProperty('top', '76px', 'important');
+      sp1.style.setProperty('z-index', '10', 'important');
+      sp2.style.setProperty('inset', 'auto', 'important');
+      sp2.style.setProperty('top', '90px', 'important');
+      sp2.style.setProperty('z-index', '20', 'important');
+      sp3.style.setProperty('inset', 'auto', 'important');
+      sp3.style.setProperty('top', '104px', 'important');
+      sp3.style.setProperty('z-index', '30', 'important');
+
+      const r1 = sp1.getBoundingClientRect();
+      const r2 = sp2.getBoundingClientRect();
+      const r3 = sp3.getBoundingClientRect();
+
+      // Card 1 scales down (1.0 -> 0.90) and blurs (0px -> 5px) as Card 2 slides over it
+      const overlap2 = Math.max(0, Math.min(1, (r1.bottom - r2.top) / (r1.height * 0.85)));
+      const s1 = 1 - (overlap2 * 0.10);
+      const b1 = overlap2 * 5.0;
+      const br1 = 100 - (overlap2 * 12);
+      card1.style.transform = 'scale(' + s1.toFixed(3) + ')';
+      card1.style.filter = 'blur(' + b1.toFixed(1) + 'px) brightness(' + br1.toFixed(0) + '%)';
+
+      // Card 2 scales down (1.0 -> 0.94) and blurs (0px -> 5px) as Card 3 slides over it
+      const overlap3 = Math.max(0, Math.min(1, (r2.bottom - r3.top) / (r2.height * 0.85)));
+      const s2 = 1 - (overlap3 * 0.06);
+      const b2 = overlap3 * 5.0;
+      const br2 = 100 - (overlap3 * 12);
+      card2.style.transform = 'scale(' + s2.toFixed(3) + ')';
+      card2.style.filter = 'blur(' + b2.toFixed(1) + 'px) brightness(' + br2.toFixed(0) + '%)';
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          updateMobileCards();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', requestTick, { passive: true });
+    updateMobileCards();
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       initAccordions();
       initForms();
+      initMobileCardStack();
     });
   } else {
     initAccordions();
     initForms();
+    initMobileCardStack();
   }
 
   // 3. Production Service Worker Registration for Offline Caching
@@ -1632,17 +1743,17 @@ function applyShivAnshBranding(html, pageTitle, navKey) {
   // 10. Service Cards Horizontal Centering & Raised Start Positions for Full Exposure
   html = html.replace(
     'class=pin-spacer style=order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px>',
-    'class="pin-spacer" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0 auto;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px">'
+    'class="pin-spacer pin-spacer-1" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0 auto;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px">'
   );
 
   html = html.replace(
     'class=pin-spacer style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:80px 0px 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-bc8075b',
-    'class="pin-spacer" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:80px auto 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-bc8075b'
+    'class="pin-spacer pin-spacer-2" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:80px auto 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-bc8075b'
   );
 
   html = html.replace(
     'class=pin-spacer style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:80px 0px 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-549dd9e',
-    'class="pin-spacer" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:180px auto 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-549dd9e'
+    'class="pin-spacer pin-spacer-3" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:180px auto 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-549dd9e'
   );
 
   html = html.replaceAll('"layered_custom_start_position":"center top+=450"', '"layered_custom_start_position":"center top+=370"');
