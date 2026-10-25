@@ -690,7 +690,29 @@ SR7.JSON			??= {};
     }
   }
 
-  /* 4b. Responsive Services Showcase for Mobile & Tablet (<= 1024px) */
+  /* 4b. Cards Stack Container & Scroll-away on Mobile (<= 1200px) */
+  @media only screen and (max-width: 1200px) {
+    .shivansh-cards-stack-wrapper {
+      position: relative !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .shivansh-cards-stack-spacer {
+      height: 380px !important;
+      width: 100% !important;
+      display: block !important;
+    }
+  }
+  @media (min-width: 1201px) {
+    .shivansh-cards-stack-wrapper {
+      display: contents !important;
+    }
+    .shivansh-cards-stack-spacer {
+      display: none !important;
+    }
+  }
+
+  /* 4c. Responsive Services Showcase for Mobile & Tablet (<= 1024px) */
   @media only screen and (max-width: 1024px) {
     .wgl-showcase .showcase__item {
       width: 100% !important;
@@ -1880,6 +1902,23 @@ var wgl_parallax_settings = {"0":[],"ajaxurl":"https:\/\/wgl-dsites.net\/avelon\
       const br2 = 100 - (overlap3 * 12);
       card2.style.transform = 'scale(' + s2.toFixed(3) + ')';
       card2.style.filter = 'blur(' + b2.toFixed(1) + 'px) brightness(' + br2.toFixed(0) + '%)';
+
+      // Unstick & push entire card stack up and away when user scrolls into subsequent section
+      const nextSec = document.querySelector('.elementor-element-824d6c4') || document.querySelector('.elementor-element-6cb97e9');
+      if (nextSec) {
+        const nextTop = nextSec.getBoundingClientRect().top;
+        const stackBottom = 104 + (sp3.offsetHeight || 616);
+        if (nextTop < stackBottom) {
+          const pushUp = nextTop - stackBottom;
+          sp1.style.transform = 'translateY(' + pushUp + 'px)';
+          sp2.style.transform = 'translateY(' + pushUp + 'px)';
+          sp3.style.transform = 'translateY(' + pushUp + 'px)';
+        } else {
+          sp1.style.transform = '';
+          sp2.style.transform = '';
+          sp3.style.transform = '';
+        }
+      }
     }
 
     function requestTick() {

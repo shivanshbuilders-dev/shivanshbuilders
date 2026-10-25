@@ -690,7 +690,29 @@ SR7.JSON			??= {};
     }
   }
 
-  /* 4b. Responsive Services Showcase for Mobile & Tablet (<= 1024px) */
+  /* 4b. Cards Stack Container & Scroll-away on Mobile (<= 1200px) */
+  @media only screen and (max-width: 1200px) {
+    .shivansh-cards-stack-wrapper {
+      position: relative !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .shivansh-cards-stack-spacer {
+      height: 380px !important;
+      width: 100% !important;
+      display: block !important;
+    }
+  }
+  @media (min-width: 1201px) {
+    .shivansh-cards-stack-wrapper {
+      display: contents !important;
+    }
+    .shivansh-cards-stack-spacer {
+      display: none !important;
+    }
+  }
+
+  /* 4c. Responsive Services Showcase for Mobile & Tablet (<= 1024px) */
   @media only screen and (max-width: 1024px) {
     .wgl-showcase .showcase__item {
       width: 100% !important;
@@ -1546,7 +1568,7 @@ construction</span></span></h4></div><div class=wgl-infobox-content_wrapper><div
 </div>
 </div>
 </div>
-<div class="pin-spacer pin-spacer-1" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0 auto;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-981bb1a e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id=981bb1a data-element_type=container data-settings='{"layered_custom_start_position":"center top+=370","enable_layered":"yes","layered_end":".vertical-scroll-end","add_layered_animate_scroll":"zoom","layered_fade_start_opacity":{"unit":"px","size":1,"sizes":[]},"layered_start_position":"custom","layered_end_position":"top top","layered_fade_end_opacity":{"unit":"px","size":1,"sizes":[]},"layered_zoom_start_scale":{"unit":"px","size":1,"sizes":[]},"layered_zoom_end_scale":{"unit":"px","size":0.9,"sizes":[]}}' style="transition:none;filter:blur(0px) brightness(100%) contrast(100%) grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%) sepia(0%);transform-origin:50% 50%;opacity:1;inset:0px auto auto 0px;margin:0px;max-width:1239px;width:1239px;max-height:590px;height:590px;padding:0px 15px;translate:none;rotate:none;scale:none;transform:translate(0px,0px)">
+<div <div class="shivansh-cards-stack-wrapper"><div class="pin-spacer pin-spacer-1" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0 auto;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-981bb1a e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id=981bb1a data-element_type=container data-settings='{"layered_custom_start_position":"center top+=370","enable_layered":"yes","layered_end":".vertical-scroll-end","add_layered_animate_scroll":"zoom","layered_fade_start_opacity":{"unit":"px","size":1,"sizes":[]},"layered_start_position":"custom","layered_end_position":"top top","layered_fade_end_opacity":{"unit":"px","size":1,"sizes":[]},"layered_zoom_start_scale":{"unit":"px","size":1,"sizes":[]},"layered_zoom_end_scale":{"unit":"px","size":0.9,"sizes":[]}}' style="transition:none;filter:blur(0px) brightness(100%) contrast(100%) grayscale(0%) hue-rotate(0deg) invert(0%) saturate(100%) sepia(0%);transform-origin:50% 50%;opacity:1;inset:0px auto auto 0px;margin:0px;max-width:1239px;width:1239px;max-height:590px;height:590px;padding:0px 15px;translate:none;rotate:none;scale:none;transform:translate(0px,0px)">
 <div class=e-con-inner>
 <div class="elementor-element elementor-element-e372a2d e-con-full e-flex e-con e-child" data-id=e372a2d data-element_type=container>
 <div class="elementor-element elementor-element-21aa120 e-con-full e-flex e-con e-child" data-id=21aa120 data-element_type=container data-settings='{"background_background":"classic"}'>
@@ -1642,6 +1664,7 @@ construction</span></span></h4></div><div class=wgl-infobox-content_wrapper><div
 </div>
 </div>
 </div></div>
+<div class="shivansh-cards-stack-spacer"></div></div>
 <div class="elementor-element elementor-element-824d6c4 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id=824d6c4 data-element_type=container>
 <div class=e-con-inner>
 <div class="elementor-element elementor-element-4ea150d elementor-widget elementor-widget-spacer" data-id=4ea150d data-element_type=widget data-widget_type=spacer.default>
@@ -2274,6 +2297,23 @@ var wgl_parallax_settings = {"0":{"bb73144":{"add_background_animation":"yes","i
       const br2 = 100 - (overlap3 * 12);
       card2.style.transform = 'scale(' + s2.toFixed(3) + ')';
       card2.style.filter = 'blur(' + b2.toFixed(1) + 'px) brightness(' + br2.toFixed(0) + '%)';
+
+      // Unstick & push entire card stack up and away when user scrolls into subsequent section
+      const nextSec = document.querySelector('.elementor-element-824d6c4') || document.querySelector('.elementor-element-6cb97e9');
+      if (nextSec) {
+        const nextTop = nextSec.getBoundingClientRect().top;
+        const stackBottom = 104 + (sp3.offsetHeight || 616);
+        if (nextTop < stackBottom) {
+          const pushUp = nextTop - stackBottom;
+          sp1.style.transform = 'translateY(' + pushUp + 'px)';
+          sp2.style.transform = 'translateY(' + pushUp + 'px)';
+          sp3.style.transform = 'translateY(' + pushUp + 'px)';
+        } else {
+          sp1.style.transform = '';
+          sp2.style.transform = '';
+          sp3.style.transform = '';
+        }
+      }
     }
 
     function requestTick() {

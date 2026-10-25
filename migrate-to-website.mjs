@@ -854,7 +854,29 @@ const ENHANCED_STYLES = `
     }
   }
 
-  /* 4b. Responsive Services Showcase for Mobile & Tablet (<= 1024px) */
+  /* 4b. Cards Stack Container & Scroll-away on Mobile (<= 1200px) */
+  @media only screen and (max-width: 1200px) {
+    .shivansh-cards-stack-wrapper {
+      position: relative !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .shivansh-cards-stack-spacer {
+      height: 380px !important;
+      width: 100% !important;
+      display: block !important;
+    }
+  }
+  @media (min-width: 1201px) {
+    .shivansh-cards-stack-wrapper {
+      display: contents !important;
+    }
+    .shivansh-cards-stack-spacer {
+      display: none !important;
+    }
+  }
+
+  /* 4c. Responsive Services Showcase for Mobile & Tablet (<= 1024px) */
   @media only screen and (max-width: 1024px) {
     .wgl-showcase .showcase__item {
       width: 100% !important;
@@ -1297,6 +1319,23 @@ const GLOBAL_SCRIPTS = `
       const br2 = 100 - (overlap3 * 12);
       card2.style.transform = 'scale(' + s2.toFixed(3) + ')';
       card2.style.filter = 'blur(' + b2.toFixed(1) + 'px) brightness(' + br2.toFixed(0) + '%)';
+
+      // Unstick & push entire card stack up and away when user scrolls into subsequent section
+      const nextSec = document.querySelector('.elementor-element-824d6c4') || document.querySelector('.elementor-element-6cb97e9');
+      if (nextSec) {
+        const nextTop = nextSec.getBoundingClientRect().top;
+        const stackBottom = 104 + (sp3.offsetHeight || 616);
+        if (nextTop < stackBottom) {
+          const pushUp = nextTop - stackBottom;
+          sp1.style.transform = 'translateY(' + pushUp + 'px)';
+          sp2.style.transform = 'translateY(' + pushUp + 'px)';
+          sp3.style.transform = 'translateY(' + pushUp + 'px)';
+        } else {
+          sp1.style.transform = '';
+          sp2.style.transform = '';
+          sp3.style.transform = '';
+        }
+      }
     }
 
     function requestTick() {
@@ -1740,10 +1779,10 @@ function applyShivAnshBranding(html, pageTitle, navKey) {
     }
   }
 
-  // 10. Service Cards Horizontal Centering & Raised Start Positions for Full Exposure
+  // 10. Service Cards Horizontal Centering, Wrapper & Raised Start Positions for Full Exposure
   html = html.replace(
     'class=pin-spacer style=order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px>',
-    'class="pin-spacer pin-spacer-1" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0 auto;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px">'
+    '<div class="shivansh-cards-stack-wrapper"><div class="pin-spacer pin-spacer-1" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:0 auto;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px">'
   );
 
   html = html.replace(
@@ -1754,6 +1793,11 @@ function applyShivAnshBranding(html, pageTitle, navKey) {
   html = html.replace(
     'class=pin-spacer style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:80px 0px 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-549dd9e',
     'class="pin-spacer pin-spacer-3" style="order:0;place-self:auto;grid-area:auto;z-index:auto;float:none;flex-shrink:1;display:flex;margin:180px auto 0px;inset:0px;position:relative;flex-basis:auto;overflow:visible;box-sizing:border-box;width:1239px;height:590px;padding:0px"><div class="elementor-element elementor-element-549dd9e'
+  );
+
+  html = html.replace(
+    '<div class="elementor-element elementor-element-824d6c4',
+    '<div class="shivansh-cards-stack-spacer"></div></div>\n<div class="elementor-element elementor-element-824d6c4'
   );
 
   html = html.replaceAll('"layered_custom_start_position":"center top+=450"', '"layered_custom_start_position":"center top+=370"');
