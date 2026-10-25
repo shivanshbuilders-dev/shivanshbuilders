@@ -157,8 +157,9 @@ SR7.JSON			??= {};
       display: none !important;
     }
 
-    body {
-      padding-top: 10px !important;
+    html, body {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
     }
 
     .pill-nav-mobile-wrapper {
@@ -491,7 +492,7 @@ SR7.JSON			??= {};
     max-width: 100% !important;
   }
 
-  /* 4. Desktop Service Cards Horizontal Centering */
+  /* 4. Service Cards & Showcase Layout (Desktop & Mobile) */
   @media (min-width: 1201px) {
     .pin-spacer {
       margin-left: auto !important;
@@ -503,6 +504,251 @@ SR7.JSON			??= {};
     .elementor-element.elementor-element-549dd9e {
       margin-left: auto !important;
       margin-right: auto !important;
+    }
+  }
+
+  /* 4a. Mobile & Tablet Service Cards Responsive Layout (<= 1200px) */
+  @media only screen and (max-width: 1200px) {
+    .pin-spacer {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 16px !important;
+      margin: 0 auto 30px auto !important;
+      inset: auto !important;
+      position: relative !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      transform: none !important;
+      clear: both !important;
+    }
+
+    .elementor-element.elementor-element-981bb1a,
+    .elementor-element.elementor-element-bc8075b,
+    .elementor-element.elementor-element-549dd9e {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      margin: 0 auto !important;
+      position: relative !important;
+      inset: auto !important;
+      transform: none !important;
+      box-sizing: border-box !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .elementor-element-981bb1a .e-con-inner,
+    .elementor-element-bc8075b .e-con-inner,
+    .elementor-element-549dd9e .e-con-inner {
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 auto !important;
+      box-sizing: border-box !important;
+    }
+
+    .elementor-element-e372a2d,
+    .elementor-element-a4e973c,
+    .elementor-element-62502c5 {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .elementor-element-21aa120,
+    .elementor-element-82ecd13,
+    .elementor-element-f8720b9 {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 28px 20px !important;
+      box-sizing: border-box !important;
+      height: auto !important;
+      border-radius: 10px !important;
+      background-color: #f7f7f8 !important;
+    }
+
+    .elementor-element-da13c3d,
+    .elementor-element-bc8075b .elementor-element-21aa120 > div:first-child,
+    .elementor-element-549dd9e .elementor-element-21aa120 > div:first-child {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .elementor-element-6933adf,
+    .elementor-element-981bb1a .e-con-child,
+    .elementor-element-bc8075b .e-con-child,
+    .elementor-element-549dd9e .e-con-child {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .elementor-element-981bb1a .dblh__title-wrapper,
+    .elementor-element-bc8075b .dblh__title-wrapper,
+    .elementor-element-549dd9e .dblh__title-wrapper {
+      font-size: 26px !important;
+      line-height: 1.25 !important;
+      padding: 0 !important;
+    }
+
+    .elementor-element-981bb1a .dblh__subtitle,
+    .elementor-element-bc8075b .dblh__subtitle,
+    .elementor-element-549dd9e .dblh__subtitle {
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      color: #FB651B !important;
+      margin-bottom: 8px !important;
+    }
+
+    .elementor-element-981bb1a .elementor-widget-text-editor,
+    .elementor-element-bc8075b .elementor-widget-text-editor,
+    .elementor-element-549dd9e .elementor-widget-text-editor {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 12px 0 16px 0 !important;
+    }
+
+    .elementor-element-981bb1a .elementor-widget-text-editor p,
+    .elementor-element-bc8075b .elementor-widget-text-editor p,
+    .elementor-element-549dd9e .elementor-widget-text-editor p {
+      font-size: 14.5px !important;
+      line-height: 1.55 !important;
+      color: #555555 !important;
+      margin: 0 !important;
+    }
+
+    .elementor-element-ef2de4c,
+    .elementor-element-bc8075b .elementor-widget-image,
+    .elementor-element-549dd9e .elementor-widget-image {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-top: 18px !important;
+      box-sizing: border-box !important;
+    }
+
+    .elementor-element-981bb1a img,
+    .elementor-element-bc8075b img,
+    .elementor-element-549dd9e img {
+      width: 100% !important;
+      height: 220px !important;
+      max-height: 220px !important;
+      object-fit: cover !important;
+      border-radius: 8px !important;
+      display: block !important;
+    }
+
+    .elementor-element-981bb1a .wgl-widget__button,
+    .elementor-element-bc8075b .wgl-widget__button,
+    .elementor-element-549dd9e .wgl-widget__button {
+      min-width: 48px !important;
+      min-height: 48px !important;
+      width: 48px !important;
+      height: 48px !important;
+      background-color: #FB651B !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 4px !important;
+      margin-top: 6px !important;
+    }
+  }
+
+  /* 4b. Responsive Services Showcase for Mobile & Tablet (<= 1024px) */
+  @media only screen and (max-width: 1024px) {
+    .wgl-showcase .showcase__item {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      padding: 24px 20px !important;
+      margin-bottom: 20px !important;
+      border-radius: 8px !important;
+    }
+    .wgl-showcase .showcase__item_inner {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      gap: 12px !important;
+      box-sizing: border-box !important;
+    }
+    .wgl-showcase .showcase__title {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: none !important;
+      gap: 6px !important;
+    }
+    .wgl-showcase .showcase__title .title {
+      font-size: 22px !important;
+      font-weight: 800 !important;
+      line-height: 1.25 !important;
+      text-transform: uppercase !important;
+      margin: 0 !important;
+    }
+    .wgl-showcase .showcase__subtitle {
+      display: block !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      color: #FB651B !important;
+      letter-spacing: 0.5px !important;
+    }
+    .wgl-showcase .showcase__content_wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: none !important;
+    }
+    .wgl-showcase .showcase__content {
+      width: 100% !important;
+    }
+    .wgl-showcase .showcase__content p {
+      width: 100% !important;
+      font-size: 14.5px !important;
+      line-height: 1.6 !important;
+      color: #555555 !important;
+      margin: 0 !important;
+    }
+    .wgl-showcase .showcase__item.active .showcase__title .title {
+      color: #ffffff !important;
+    }
+    .wgl-showcase .showcase__item.active .showcase__subtitle {
+      color: #FB651B !important;
+    }
+    .wgl-showcase .showcase__item.active .showcase__content p {
+      color: rgba(255, 255, 255, 0.9) !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
+    }
+    .wgl-showcase .wgl-button-wrapper {
+      margin-top: 8px !important;
+      display: block !important;
+      width: auto !important;
+      align-self: flex-start !important;
+      flex: none !important;
+    }
+    .wgl-showcase .wgl-button-wrapper .wgl-showcase__button {
+      width: 48px !important;
+      height: 48px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #FB651B !important;
+      color: #ffffff !important;
+      border-radius: 4px !important;
+    }
+    .wgl-showcase .wgl-button-wrapper .icon-wrapper svg {
+      fill: #ffffff !important;
     }
   }
 
