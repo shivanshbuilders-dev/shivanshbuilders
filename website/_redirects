@@ -1,0 +1,3 @@
+# Netlify Redirects for ShivAnsh Builders & Developers
+# Return custom 404 page with real HTTP 404 status code for unmatched routes
+/*    /404.html    404

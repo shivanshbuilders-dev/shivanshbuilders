@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+
+# Read-only reference clones (do not commit to production repository)
+clones/
+About Us – Avelon (24_10_2026 2：45：12 pm).html
+Avelon – Web Genius Lab (24_10_2026 1：43：59 pm).html
+Example Domain (24_10_2026 2：45：47 pm).html
+
+# Temporary artifacts, caches, and test outputs
+scratch/
+cache/
+out/
+sites/
+/*.png
+/*.webp
+*.log
+pixdiff.ps1
+snap.cmd
+
+# Explicitly ensure all production website assets are tracked
+!website/**
+
+# Disposable development scratch scripts
+anim-test.mjs
+batch-runner.mjs
+cdp-shot.mjs
+check-patch.mjs
+clone-one.mjs
+expr-anim.js
+expr-one.js
+extract-cache.mjs
+inspect-anim.mjs
+inspect-wp.mjs
+link-all.mjs
+patch-chunks.mjs
+pipeline.mjs
+probe.mjs
+probe2.mjs
+restore-anim.mjs
+run-snap.mjs
+scrape.mjs
+verify-all.mjs
+verify.mjs
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
