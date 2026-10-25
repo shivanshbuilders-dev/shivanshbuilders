@@ -1,0 +1,12 @@
+# Production Security & Caching Headers (Cloudflare Pages & Static Hosting)
+
+# Global Security Headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Service Worker - Disallow aggressive caching and ensure root scope authorization
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Service-Worker-Allowed: /

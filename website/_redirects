@@ -1,3 +1,3 @@
-# Netlify Redirects for ShivAnsh Builders & Developers
-# Return custom 404 page with real HTTP 404 status code for unmatched routes
+# Static Hosting Redirects & Custom 404 (Cloudflare Pages & Netlify compatible)
+# Serves the custom 404 page with HTTP 404 status for unmatched routes
 /*    /404.html    404

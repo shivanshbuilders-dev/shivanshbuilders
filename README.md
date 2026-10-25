@@ -1,18 +1,18 @@
 # ShivAnsh Builders & Developers — Official Website
 
-Official production website repository for **ShivAnsh Builders & Developers**, engineered for static deployment on Netlify.
+Official production website repository for **ShivAnsh Builders & Developers**, engineered as a lightweight, high-performance static HTML/CSS/JavaScript project ready for free commercial static hosting on Cloudflare Pages.
 
 ## Overview
 - **Brand**: ShivAnsh Builders & Developers
 - **Office Address**: A 232, Balaji Bhavan, Plot No. 42A, Sector 11, CBD Belapur, Navi Mumbai - 400614
 - **Phone**: +91 9082451849
 - **Email**: shivanshbuilders.dev@gmail.com
-- **Deployment Platform**: Netlify (Static Hosting)
+- **Hosting Strategy**: Cloudflare Pages (Free Commercial Static Tier)
 
 ---
 
 ## Website Structure
-The production website is self-contained in the `website/` directory:
+The entire production website is self-contained in the `website/` directory:
 - `index.html` — Homepage with dynamic hero slider, company overview, services showcase, interactive testimonial slider, and marquee
 - `about-us.html` — Company history, engineering philosophy, and values
 - `our-team.html` — Leadership and engineering teams
@@ -33,21 +33,19 @@ The production website is self-contained in the `website/` directory:
 - `404.html` — Custom 404 error page returning true HTTP 404 status
 - `offline.html` — Dedicated offline/no-internet page with automatic reconnection and retry mechanism
 - `sw.js` — Service worker providing offline page fallback
-- `_redirects` — Netlify routing rules (`/* /404.html 404`)
+- `_headers` — Production security and caching headers (Cloudflare Pages native format)
+- `_redirects` — Static routing rules (`/* /404.html 404`)
 
 ---
 
-## Netlify Deployment
-The project is pre-configured for instant Netlify static deployment via `netlify.toml`:
-```toml
-[build]
-  publish = "website"
+## Cloudflare Pages Deployment Configuration
+When connecting this repository to Cloudflare Pages:
+- **Framework Preset**: `None`
+- **Build Command**: *(Leave empty for pre-compiled static deployment, or `npm run build` if building from source)*
+- **Build Output Directory**: `website`
+- **Root Directory**: `/`
 
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
-```
+Cloudflare Pages automatically serves `website/404.html` with real HTTP 404 responses for unmatched routes, and applies edge security & service-worker headers from `website/_headers`.
 
 ---
 
